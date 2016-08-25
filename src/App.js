@@ -3,6 +3,16 @@ import { Grid, Row, Col, Jumbotron, Button } from 'react-bootstrap';
 import Step from './Step';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {authenticated: false};
+    this.authenticate = this.authenticate.bind(this);
+  }
+
+  authenticate() {
+    this.setState({authenticated: true});
+  }
+
   render() {
     return (
       <Grid>
@@ -16,17 +26,17 @@ class App extends Component {
         </Row>
         <Row>
           <Step>
-            <Button>
+            <Button disabled={this.state.authenticated} onClick={this.authenticate}>
               Connect with Trello
             </Button>
           </Step>
           <Step>
-            <Button>
+            <Button disabled={!this.state.authenticated}>
               Select "Vesper Export ƒ" Folder
             </Button>
           </Step>
           <Step>
-            <Button>
+            <Button disabled={!this.state.authenticated}>
               Upload Cards
             </Button>
           </Step>
