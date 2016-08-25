@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
 import Step from './Step';
+import InfoPanel from './InfoPanel';
 import FolderInput from './FolderInput';
+import NotesList from './NotesList';
 import { parseFiles } from './vesper';
 
 export default class VesperStep extends Component {
   state = {
-    status: '',
+    message: '',
+    error: false,
   }
 
   parseFolder = async event => {
@@ -14,11 +17,13 @@ export default class VesperStep extends Component {
       const notes = await parseFiles(event.target.files);
       this.props.handleNotes(notes);
       this.setState({
-        status: `Found ${notes.length} Active and Archived notes`,
+        message: `Found ${notes.length} Active and Archived notes`,
+        error: false,
       });
     } catch (e) {
       this.setState({
-        status: e.message,
+        message: e.message,
+        error: true,
       });
     }
   }
@@ -28,13 +33,20 @@ export default class VesperStep extends Component {
     if(!this.props.active){
       labelClass += ' disabled';
     }
+    let infoPanel;
+    if(this.state.message){
+      infoPanel = (
+        <InfoPanel message={this.state.message} error={this.state.error}>
+          <NotesList notes={this.props.notes} />
+        </InfoPanel>
+      )
+    }
     return (
-      <Step>
+      <Step info={infoPanel}>
         <label className={labelClass}>
           Select "Vesper Export ƒ" Folder
           <FolderInput disabled={!this.props.active} onChange={this.parseFolder} className='hidden'/>
         </label>
-        {this.state.status}
       </Step>
     );
   }
