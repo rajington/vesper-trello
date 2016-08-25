@@ -5,9 +5,9 @@ import { authorize } from './trello';
 import Step from './Step';
 
 export default ({active}) => (
-  <Step>
+  <Step message={active ? null : 'Authenticated'}>
     <Button disabled={!active} onClick={authorize}>
-      Connect with Trello
+      Connect to Trello
     </Button>
   </Step>
 );

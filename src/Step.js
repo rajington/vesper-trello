@@ -1,10 +1,23 @@
 import React from 'react';
-import { Col, Well } from 'react-bootstrap';
+import { Col, Panel } from 'react-bootstrap';
 
-export default ({children}) => (
-  <Col xs={4}>
-    <Well bsSize="large" className="text-center">
-    {children}
-    </Well>
-  </Col>
-);
+export default ({message, error, log, children}) => {
+  let infoPanel;
+  if(message || error){
+    infoPanel = (
+      <Panel header={message || error} bsStyle={error ? 'danger' : 'success'}>
+        {log}
+      </Panel >
+    )
+  }
+  return (
+    <div>
+      <Col xs={4}>
+        <Panel className="text-center">
+        {children}
+        </Panel >
+        { infoPanel }
+      </Col>
+    </div>
+  );
+}
