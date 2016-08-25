@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Step from './Step';
 import FolderInput from './FolderInput';
-import vesper from './vesper';
+import { parseFiles } from './vesper';
 
 export default class VesperStep extends Component {
   state = {
@@ -11,7 +11,7 @@ export default class VesperStep extends Component {
 
   parseFolder = async event => {
     try {
-      const notes = await vesper.parseFiles(event.target.files);
+      const notes = await parseFiles(event.target.files);
       this.props.handleNotes(notes);
       this.setState({
         status: `Found ${notes.length} Active and Archived notes`,
