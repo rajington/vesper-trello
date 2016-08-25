@@ -3,13 +3,11 @@ import { Grid, Row, Col, Jumbotron, Button } from 'react-bootstrap';
 import Step from './Step';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {authenticated: false};
-    this.authenticate = this.authenticate.bind(this);
+  state = {
+    authenticated: false,
   }
 
-  authenticate() {
+  authenticate = () => {
     this.setState({authenticated: true});
   }
 
