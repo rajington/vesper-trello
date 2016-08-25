@@ -35,9 +35,13 @@ export default class VesperStep extends Component {
     }
     let infoPanel;
     if(this.state.message){
+      let notesList;
+      if(this.props.notes.length) {
+        notesList = <NotesList notes={this.props.notes} />;
+      }
       infoPanel = (
         <InfoPanel message={this.state.message} error={this.state.error}>
-          <NotesList notes={this.props.notes} />
+          {notesList}
         </InfoPanel>
       )
     }
