@@ -1,22 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import Step from './Step';
-import { Button } from 'react-bootstrap';
-
 import FolderInput from './FolderInput';
+import vesper from './vesper';
 
-const getNotes = handleNotes => () => handleNotes([1, 2, 3]);
-
-export default ({active, notes, handleNotes}) => {
-  let labelClass = 'btn btn-default';
-  if(!active){
-    labelClass += ' disabled';
+export default class VesperStep extends Component {
+  state = {
+    status: '',
   }
-  return (
-    <Step>
-      <label className={labelClass}>
-        Select "Vesper Export ƒ" Folder
-        <FolderInput disabled={!active} onChange={getNotes} className='hidden'/>
-      </label>
-    </Step>
-  );
+
+  parseFolder = event => {
+    try {
+      const notes = vesper.parseFiles(event.target.files);
+      this.props.handleNotes(notes);
+      this.setState({
+        status: `Found ${notes.length} Active and Archived notes`,
+      });
+    } catch (e) {
+      this.setState({
+        status: e.message,
+      });
+    }
+  }
+
+  render() {
+    let labelClass = 'btn btn-default';
+    if(!this.props.active){
+      labelClass += ' disabled';
+    }
+    return (
+      <Step>
+        <label className={labelClass}>
+          Select "Vesper Export ƒ" Folder
+          <FolderInput disabled={!this.props.active} onChange={this.parseFolder} className='hidden'/>
+        </label>
+        {this.state.status}
+      </Step>
+    );
+  }
 }
