@@ -8,9 +8,19 @@ const getPictures = files =>
         map.set(picture.webkitRelativePath, picture)
     , new Map());
 
+const parseNote = (text, pictures) => text;
+
 const createNotes = (files, pictures) =>
-  files
-    .filter(fileHelper.isNote);
+  Promise.all(
+    files
+      .filter(fileHelper.isNote)
+      .map(
+        async file => {
+          const text = await fileHelper.readText(file);
+          return parseNote(text, pictures);
+        }
+      )
+  );
 
 export default {
   parseFiles(files) {

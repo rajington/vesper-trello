@@ -9,9 +9,9 @@ export default class VesperStep extends Component {
     status: '',
   }
 
-  parseFolder = event => {
+  parseFolder = async event => {
     try {
-      const notes = vesper.parseFiles(event.target.files);
+      const notes = await vesper.parseFiles(event.target.files);
       this.props.handleNotes(notes);
       this.setState({
         status: `Found ${notes.length} Active and Archived notes`,
