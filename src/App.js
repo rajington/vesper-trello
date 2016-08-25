@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Jumbotron, Button } from 'react-bootstrap';
-import Step from './Step';
+import { Grid, Row, Col, Jumbotron } from 'react-bootstrap';
+
+import TrelloStep from './TrelloStep';
+import VesperStep from './VesperStep';
+import ImportStep from './ImportStep';
 
 class App extends Component {
   state = {
     authenticated: false,
+    notes: [],
   }
 
   authenticate = () => {
     this.setState({authenticated: true});
+  }
+
+  handleNotes = notes => {
+    this.setState({notes});
   }
 
   render() {
@@ -23,21 +31,9 @@ class App extends Component {
           </Col>
         </Row>
         <Row>
-          <Step>
-            <Button disabled={this.state.authenticated} onClick={this.authenticate}>
-              Connect with Trello
-            </Button>
-          </Step>
-          <Step>
-            <Button disabled={!this.state.authenticated}>
-              Select "Vesper Export ƒ" Folder
-            </Button>
-          </Step>
-          <Step>
-            <Button disabled={!this.state.authenticated}>
-              Upload Cards
-            </Button>
-          </Step>
+          <TrelloStep active={!this.state.authenticated} authenticate={this.authenticate} />
+          <VesperStep active={this.state.authenticated} notes={this.state.notes} handleNotes={this.handleNotes}/>
+          <ImportStep active={this.state.notes.length} />
         </Row>
       </Grid>
     );
