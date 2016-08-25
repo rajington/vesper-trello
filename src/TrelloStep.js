@@ -1,10 +1,14 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+
+import Trello from './Trello';
 import Step from './Step';
 
-export default ({active, authenticate}) => (
+const authorize = () => Trello.authorize();
+
+export default ({active}) => (
   <Step>
-    <Button disabled={!active} onClick={authenticate}>
+    <Button disabled={!active} onClick={authorize}>
       Connect with Trello
     </Button>
   </Step>

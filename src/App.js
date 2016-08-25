@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Jumbotron } from 'react-bootstrap';
 
+import Trello from './Trello';
+
 import TrelloStep from './TrelloStep';
 import VesperStep from './VesperStep';
 import ImportStep from './ImportStep';
 
 class App extends Component {
   state = {
-    authenticated: false,
     notes: [],
-  }
-
-  authenticate = () => {
-    this.setState({authenticated: true});
+    authorize: Trello.authorized(),
   }
 
   handleNotes = notes => {
@@ -31,8 +29,8 @@ class App extends Component {
           </Col>
         </Row>
         <Row>
-          <TrelloStep active={!this.state.authenticated} authenticate={this.authenticate} />
-          <VesperStep active={this.state.authenticated} notes={this.state.notes} handleNotes={this.handleNotes}/>
+          <TrelloStep active={!this.state.authorize} />
+          <VesperStep active={this.state.authorize} notes={this.state.notes} handleNotes={this.handleNotes}/>
           <ImportStep active={this.state.notes.length} />
         </Row>
       </Grid>
