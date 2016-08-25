@@ -21,7 +21,7 @@ export default {
     const reader = new FileReader();
 
     return new Promise((resolve, reject) => {
-      reader.onload = resolve;
+      reader.onload = () => resolve(reader.result);
       reader.onerror = reject;
       reader.readAsText(file);
     });
