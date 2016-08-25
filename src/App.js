@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Jumbotron } from 'react-bootstrap';
 
-import Trello from './Trello';
+import { authorized } from './trello';
 
 import TrelloStep from './TrelloStep';
 import VesperStep from './VesperStep';
@@ -10,7 +10,7 @@ import ImportStep from './ImportStep';
 class App extends Component {
   state = {
     notes: [],
-    authorized: Trello.authorized(),
+    authorized: authorized(),
   }
 
   handleNotes = notes => {

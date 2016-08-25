@@ -1,10 +1,8 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-import Trello from './Trello';
+import { authorize } from './trello';
 import Step from './Step';
-
-const authorize = () => Trello.authorize();
 
 export default ({active}) => (
   <Step>
