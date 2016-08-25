@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Jumbotron } from 'react-bootstrap';
+import { Grid, Row, Col, Jumbotron, Button } from 'react-bootstrap';
+import Step from './Step';
 
 class App extends Component {
   render() {
@@ -14,15 +15,21 @@ class App extends Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={4}>
-            Connect to Trello
-          </Col>
-          <Col xs={4}>
-            Select "Vesper Export ƒ" Folder
-          </Col>
-          <Col xs={4}>
-            Upload Cards
-          </Col>
+          <Step>
+            <Button>
+              Connect with Trello
+            </Button>
+          </Step>
+          <Step>
+            <Button>
+              Select "Vesper Export ƒ" Folder
+            </Button>
+          </Step>
+          <Step>
+            <Button>
+              Upload Cards
+            </Button>
+          </Step>
         </Row>
       </Grid>
     );
