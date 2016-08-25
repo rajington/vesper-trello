@@ -30,8 +30,10 @@ class App extends Component {
         </Row>
         <Row>
           <TrelloStep active={!this.state.authorized} />
-          <VesperStep active={this.state.authorized} notes={this.state.notes} handleNotes={this.handleNotes}/>
-          <ImportStep active={this.state.notes.length} />
+          <VesperStep active={this.state.authorized && this.state.notes.length === 0}
+                      notes={this.state.notes}
+                      handleNotes={this.handleNotes}/>
+          <ImportStep active={this.state.notes.length !== 0} />
         </Row>
       </Grid>
     );
