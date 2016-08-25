@@ -10,7 +10,7 @@ import ImportStep from './ImportStep';
 class App extends Component {
   state = {
     notes: [],
-    authorize: Trello.authorized(),
+    authorized: Trello.authorized(),
   }
 
   handleNotes = notes => {
@@ -29,8 +29,8 @@ class App extends Component {
           </Col>
         </Row>
         <Row>
-          <TrelloStep active={!this.state.authorize} />
-          <VesperStep active={this.state.authorize} notes={this.state.notes} handleNotes={this.handleNotes}/>
+          <TrelloStep active={!this.state.authorized} />
+          <VesperStep active={this.state.authorized} notes={this.state.notes} handleNotes={this.handleNotes}/>
           <ImportStep active={this.state.notes.length} />
         </Row>
       </Grid>
