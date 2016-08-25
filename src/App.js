@@ -18,6 +18,8 @@ class App extends Component {
   }
 
   render() {
+    const {authorized, notes} = this.state;
+
     return (
       <Grid>
         <Row>
@@ -29,11 +31,12 @@ class App extends Component {
           </Col>
         </Row>
         <Row>
-          <TrelloStep active={!this.state.authorized} />
-          <VesperStep active={this.state.authorized && this.state.notes.length === 0}
-                      notes={this.state.notes}
+          <TrelloStep active={!authorized} />
+          <VesperStep active={authorized && notes.length === 0}
+                      notes={notes}
                       handleNotes={this.handleNotes}/>
-          <ImportStep active={this.state.notes.length !== 0} />
+          <ImportStep active={notes.length !== 0}
+                      notes={notes}/>
         </Row>
       </Grid>
     );
