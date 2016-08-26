@@ -41,7 +41,7 @@ export default class ImportStep extends Component {
     return (
       <Step info={infoPanel}>
         <Button disabled={!active} onClick={this.handleImport}>
-          Upload Cards {this.state.progress}
+          Upload Cards
         </Button>
       </Step>
     );
