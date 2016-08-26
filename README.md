@@ -1,5 +1,7 @@
 ## vesper-trello
 
+![Screencast](/screencast.gif)
+
 Easily import your Vesper notes into Trello using the [helper](https://rajington.github.io/vesper-trello/), more information available on [medium](https://medium.com/@rajington/vesper-trello-168732c63d97).
 
 ### Directions
