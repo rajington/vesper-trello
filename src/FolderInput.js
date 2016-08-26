@@ -1,3 +1,4 @@
+// special file input allowing folder selection
 import React from 'react';
 
 const giveCustomAttributes = (input) => {

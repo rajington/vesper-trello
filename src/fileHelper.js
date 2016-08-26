@@ -17,6 +17,7 @@ export default {
   getFolder: archived =>
     `Vesper Export ƒ/${archived ? 'Archived' : 'Active'} Notes/Pictures/`,
 
+  // promisified file text reading using FileReader
   readText: file => {
     const reader = new FileReader();
 

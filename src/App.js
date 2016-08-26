@@ -7,10 +7,10 @@ import TrelloStep from './TrelloStep';
 import VesperStep from './VesperStep';
 import ImportStep from './ImportStep';
 
-class App extends Component {
+export default class App extends Component {
   state = {
-    notes: [],
-    authorized: authorized(),
+    notes: [], // the processed notes
+    authorized: authorized(), // whether the Trello client is authorized
   }
 
   handleNotes = notes => {
@@ -42,5 +42,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

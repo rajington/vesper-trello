@@ -35,8 +35,8 @@ const createList = board =>
   });
 
 const createCard = (name, desc, idList, idLabels, picture) => {
+  // the official Trello client.js sends everything via JSON, so attachments don't work
   if(picture) {
-    // the official Trello client.js sends everything via JSON, so file uploads don't work
     const body = new FormData();
     body.append('name', name);
     body.append('desc', desc);
