@@ -29,18 +29,21 @@ export default class VesperStep extends Component {
   }
 
   render() {
+    const { active, notes } = this.props;
+    const { message, error } = this.state;
+
     let labelClass = 'btn btn-default';
-    if(!this.props.active){
+    if(!active){
       labelClass += ' disabled';
     }
     let infoPanel;
-    if(this.state.message){
+    if(message){
       let notesList;
-      if(this.props.notes.length) {
-        notesList = <NotesList notes={this.props.notes} />;
+      if(notes.length) {
+        notesList = <NotesList notes={notes} />;
       }
       infoPanel = (
-        <InfoPanel message={this.state.message} error={this.state.error}>
+        <InfoPanel message={message} error={error}>
           {notesList}
         </InfoPanel>
       )
@@ -49,7 +52,7 @@ export default class VesperStep extends Component {
       <Step info={infoPanel}>
         <label className={labelClass}>
           Select "Vesper Export ƒ" Folder
-          <FolderInput disabled={!this.props.active} onChange={this.parseFolder} className='hidden'/>
+          <FolderInput disabled={!active} onChange={this.parseFolder} className='hidden'/>
         </label>
       </Step>
     );
