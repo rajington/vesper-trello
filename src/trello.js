@@ -34,12 +34,6 @@ const createList = board =>
     idBoard: board.id,
   });
 
-    const newCard = {
-      name: note.title,
-      desc: note.text,
-      idList: list.id,
-    };
-
 const createCard = (name, desc, idList, idLabels, picture) => {
   if(picture) {
     // the official Trello client.js sends everything via JSON, so file uploads don't work
