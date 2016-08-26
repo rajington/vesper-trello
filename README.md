@@ -19,8 +19,12 @@ Vesper exports notes as a folder, only desktop Chrome supports folder file input
 
 - What if I'm on Windows?
 
-There's [iCloud for Windows](https://support.apple.com/en-us/HT204283)
+There's [iCloud for Windows](https://support.apple.com/en-us/HT204283).
 
 - How will you be modifying my Trello account?
 
 A new board is added (each time you import) with notes and pictures as cards and attachments. Nothing is deleted or modified beyond that one board.
+
+- The progress bar is stuck.
+
+The board and most notes are probably already created, but pictures sometimes take a while to upload (depending on the API/rate limiting, not the attachment size). The timeout is pretty long however, and should complete eventually. If you still have issues, you can always just redo the import and archive the old board.
