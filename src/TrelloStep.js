@@ -1,12 +1,11 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Panel } from 'react-bootstrap';
 
 import Step from './Step';
-import InfoPanel from './InfoPanel';
 import { authorize } from './trello';
 
 export default ({active}) => (
-  <Step info={!active && (<InfoPanel message='Authorized' />)}>
+  <Step info={!active && (<Panel header='Authorized' bsStyle='success'/>)}>
     <Button disabled={!active} onClick={authorize}>
       Connect to Trello
     </Button>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Panel } from 'react-bootstrap';
 
 import Step from './Step';
-import InfoPanel from './InfoPanel';
 import FolderInput from './FolderInput';
 import NotesList from './NotesList';
 import { parseFiles } from './vesper';
@@ -43,9 +43,9 @@ export default class VesperStep extends Component {
         notesList = <NotesList notes={notes} />;
       }
       infoPanel = (
-        <InfoPanel message={message} error={error}>
+        <Panel header={message} bsStyle={error ? 'danger' : 'success'}>
           {notesList}
-        </InfoPanel>
+        </Panel>
       )
     }
     return (
