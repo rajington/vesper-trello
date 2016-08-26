@@ -1,5 +1,6 @@
 {
   "name": "vesper-trello",
+  "homepage": "http://rajington.github.io/vesper-trello",
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
