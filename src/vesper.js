@@ -35,11 +35,11 @@ const parseNote = async (file, pictures) => {
   lines.pop(); // separator
 
   // every note has the tags field
-  const tagString = lines.pop().replace(/^Tags: /, '');
-  // but not all of them have tags
-  if (tagString) {
-    note.tags = tagString.split(', ');
-  }
+  note.tags = lines.pop()
+    .replace(/^Tags: /, '') // remove field name
+    .split(', ') // break into multiple tags
+    .filter(tag => tag); // remove empty tags
+
   lines.pop(); // separator
 
   // check for picture field
