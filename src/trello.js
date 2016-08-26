@@ -34,13 +34,13 @@ const createList = board =>
     idBoard: board.id,
   });
 
-const createCard = card => {
-  if(card.picture) {
+const createCard = (card, picture) => {
+  if(picture) {
     // the official Trello client.js sends everything via JSON, so file uploads don't work
     const body = new FormData();
     body.append('token', Trello.token());
     body.append('key', Trello.key());
-    body.append('fileSource', card.picture);
+    body.append('fileSource', picture);
     Object.keys(card).forEach(key => body.append(key, card[key]));
 
     return fetch('https://api.trello.com/1/cards', { method: 'POST', body })
@@ -96,7 +96,7 @@ const recreateLabels = async (board, notes) => {
   await clearLabels(board);
 
   const labels = await createLabels(board, getTags(notes));
-  
+
   return labels.reduce(
     (map, label) =>
       map.set(label.name, label.id)
@@ -115,23 +115,28 @@ export const importNotes = async (notes, updateProgress) => {
   let completed = 0;
   updateProgress(completed);
 
-  notes.forEach(async note => {
-    const newCard = {
-      name: note.title,
-      desc: note.text,
-      idList: list.id,
-    };
+  await Promise.all(
+    notes.map(async note => {
+      const newCard = {
+        name: note.title,
+        desc: note.text,
+        idList: list.id,
+      };
 
-    if (note.tags) {
-      newCard.idLabels = note.tags.map(tag => tagIds[tag]);
-    }
+      if (note.tags) {
+        newCard.idLabels = note.tags.map(tag => tagIds[tag]);
+      }
 
-    let card = await createCard(newCard);
+      let card = await createCard(newCard, note.picture);
 
-    if (note.archived) {
-      await archiveCard(card);
-    }
+      if (note.archived) {
+        await archiveCard(card);
+      }
 
-    updateProgress(++completed);
-  });
+      updateProgress(++completed);
+      return card;
+    })
+  );
+
+  return board.shortUrl;
 };
