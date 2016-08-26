@@ -129,7 +129,7 @@ export const importNotes = async (notes, updateProgress) => {
 
   await Promise.all(
     notes.map(async note => {
-      const tags = note.tags.map(tag => tagIds[tag]);
+      const tags = note.tags.map(tag => tagIds.get(tag));
 
       let card = await createCard(note.title, note.text, list.id, tags, note.picture);
 
