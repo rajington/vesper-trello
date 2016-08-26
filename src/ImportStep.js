@@ -33,7 +33,7 @@ export default class ImportStep extends Component {
             now={progress / total * 100}
             label={`${progress}/${total} cards`}
             active={incomplete}
-            striped
+            striped={incomplete}
           />
         </Panel>
       );
